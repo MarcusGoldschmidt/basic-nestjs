@@ -1,0 +1,25 @@
+version: '3.5'
+
+services:
+
+  db:
+    image: mysql:5.7
+    volumes:
+      - ./docker/run/var:/var/lib/mysql
+      - ./docker/up/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=123123
+      - MYSQL_DATABASE=db_pequi
+
+  php-myadmin:
+    image: phpmyadmin/phpmyadmin:fpm-alpine
+    links:
+      - db
+    ports:
+      - 80:80
+    depends_on:
+      - db
+    environment:
+      - PMA_ARBITRARY=1
