@@ -1,24 +1,25 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from 'typeorm';
-import { Permission } from './enuns/permission.enum';
-import { InfraBaseEntity } from '../domain/abstractions/base.entity';
+import {Entity, Column, Index} from 'typeorm';
+import {Permission} from './enuns/permission.enum';
+import {AppBaseEntity} from '../abstractions/appbaseEntity';
 
 @Entity('User')
-export class UserEntity extends InfraBaseEntity {
+export class UserEntity extends AppBaseEntity {
 
-  @Column({ length: 500 , unique: true})
-  name: string;
+    @Column({length: 500, unique: true})
+    name: string;
 
-  @Column({unique: true})
-  email: string;
+    @Index()
+    @Column({unique: true})
+    email: string;
 
-  @Column()
-  password: string;
+    @Column()
+    password: string;
 
-  @Column('int')
-  permission: Permission;
+    @Column('int')
+    permission: Permission;
 
-  @Column({
-      default: false,
-  })
-  verified: boolean;
+    @Column({
+        default: false,
+    })
+    verified: boolean;
 }

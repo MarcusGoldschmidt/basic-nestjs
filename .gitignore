@@ -7,4 +7,4 @@ temp/
 /docker/run
 /src/config.ts
 /data
-
+.env
