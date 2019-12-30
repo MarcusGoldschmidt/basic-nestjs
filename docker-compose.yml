@@ -11,10 +11,10 @@ services:
       - "3306:3306"
     environment:
       - MYSQL_ROOT_PASSWORD=123123
-      - MYSQL_DATABASE=db_pequi
+      - MYSQL_DATABASE=db_nestjs
 
   php-myadmin:
-    image: phpmyadmin/phpmyadmin:fpm-alpine
+    image: phpmyadmin/phpmyadmin:latest
     links:
       - db
     ports:
