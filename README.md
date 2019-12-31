@@ -15,18 +15,10 @@ $ npm install
 $ docker-compose up -d
 ```
 
-## Pg Admin
+## Php MyAdmin
 
-Email adress: pgadmin4@pgadmin.org
-Password: admin
-
-### Connection
-
-Host: postgres
-Port: 5432
-
-Username: postgres
-PassWord: admin
+user: root
+Password: 123123
 
 ## Running the app
 
