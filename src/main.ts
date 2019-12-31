@@ -4,7 +4,6 @@ import {ValidationPipe} from '@nestjs/common';
 import * as env from 'dotenv';
 import {NestExpressApplication} from '@nestjs/platform-express';
 import {join} from 'path';
-import * as ReactViews from 'express-react-views';
 
 async function bootstrap() {
     env.config();
