@@ -18,6 +18,7 @@ $ docker-compose up -d
 ## Php MyAdmin
 
 user: root
+
 Password: 123123
 
 ## Running the app

@@ -16,14 +16,18 @@ let AppController = class AppController {
         this.appService = appService;
     }
     getHello() {
-        return this.appService.getHello();
+        return {
+            title: 'Teste',
+            name: 'Marcus',
+        };
     }
 };
 __decorate([
     common_1.Get(),
+    common_1.Render('index'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
-    __metadata("design:returntype", String)
+    __metadata("design:returntype", Object)
 ], AppController.prototype, "getHello", null);
 AppController = __decorate([
     common_1.Controller(),
