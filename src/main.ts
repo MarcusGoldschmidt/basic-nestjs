@@ -9,8 +9,8 @@ async function bootstrap() {
     env.config();
     const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
-    app.useStaticAssets(join(__dirname, '..', 'public'));
-    app.setBaseViewsDir(join(__dirname, '..', 'views'));
+    app.useStaticAssets(join(__dirname, '..', 'resources', 'public'));
+    app.setBaseViewsDir(join(__dirname, '..', 'resources', 'views'));
 
     app.setViewEngine('jsx');
     app.engine('jsx', require('express-react-views').createEngine());

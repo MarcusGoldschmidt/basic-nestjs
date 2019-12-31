@@ -5,7 +5,7 @@ import {Repository} from 'typeorm';
 import * as Crypt from 'bcrypt';
 import {RegisterDto} from './dto/registerDto';
 import {Permission} from './enuns/permission.enum';
-import {SECRET} from '../config';
+import Config from '../config';
 
 @Injectable()
 export class AuthService {
@@ -32,7 +32,7 @@ export class AuthService {
 
         user.verified = false;
         user.permission = Permission.Common;
-        user.password = await Crypt.hash(data.password, SECRET);
+        user.password = await Crypt.hash(data.password, Config.APP_KEY);
 
         await this.userRepository.save(user);
 

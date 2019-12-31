@@ -5,7 +5,6 @@ build/
 tmp/
 temp/
 /docker/run
-/src/config.ts
 /data
 .env
 ./dist
