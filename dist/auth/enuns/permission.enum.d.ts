@@ -1,4 +1,4 @@
 export declare enum Permission {
-    Commom = 1,
+    Common = 1,
     Admin = 2
 }

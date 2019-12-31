@@ -31,7 +31,7 @@ export class AuthService {
         user.email = data.email;
 
         user.verified = false;
-        user.permission = Permission.Commom;
+        user.permission = Permission.Common;
         user.password = await Crypt.hash(data.password, SECRET);
 
         await this.userRepository.save(user);

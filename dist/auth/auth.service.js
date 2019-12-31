@@ -34,7 +34,7 @@ let AuthService = class AuthService {
         const user = this.userRepository.create();
         user.email = data.email;
         user.verified = false;
-        user.permission = permission_enum_1.Permission.Commom;
+        user.permission = permission_enum_1.Permission.Common;
         user.password = await Crypt.hash(data.password, config_1.SECRET);
         await this.userRepository.save(user);
         return user;

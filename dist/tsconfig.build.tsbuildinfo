@@ -2214,8 +2214,8 @@
         "signature": "a94bfe8de0b5bdf852984c09095b1666941529fa69f93e90c4b538a1e9f56f92"
       },
       "../src/auth/enuns/permission.enum.ts": {
-        "version": "dd273997b987800e42d94cca98b9948437cf93530fbe991b7e68ca09af17c42a",
-        "signature": "51fa1d6ad22f68a603eea24b9229b9b64644b760fcc051d371158b9033cdc376"
+        "version": "534ab976347c9bf54a3184ff7330d41bf0f071b60b2b7afd6d2dc1bd0790c0e8",
+        "signature": "9b9c0feee9ae805b5556f66bc18c581c48e5a0631e1d90e479fd736d46378bb4"
       },
       "../src/abstractions/appbaseEntity.ts": {
         "version": "90d824183a0a6ac046862387bb2b314184601caab66aff6a9dd1010b40adc25c",
@@ -2234,7 +2234,7 @@
         "signature": "05e5baa32f57e60108b82ce7731778313f63a86956c33c887d192765e3e10fcf"
       },
       "../src/auth/auth.service.ts": {
-        "version": "a6edeaff77e09bfde96b3eac37f9940c9a247b6bf555386f1014a2cd02f05300",
+        "version": "11762f59bf956c2306bedefc22ab0df4dd2e7b958873dbd6af4fea173e680983",
         "signature": "abddffbcc77748eba7d8ab483d1279e8ac134e41b395586a42ccd15792e1e5e7"
       },
       "../src/auth/dto/loginDto.ts": {
@@ -2246,7 +2246,7 @@
         "signature": "a2ff23bf46de75d9a612ed8dd9516d8a70b91ac763230ef2cda53ce36fa9be6f"
       },
       "../src/auth/auth.module.ts": {
-        "version": "9c1671f29669b26c402a0150125b1e02cef1db89851ae1177863c48e1231f678",
+        "version": "192bd6cfd89e05b908fcffe097778f1bc381dd501528aa52beb6cc6a385758bf",
         "signature": "a28b5c0c372fb375910b3fe3c3ce4331509bc18ccef7cc39c9ee9d8daf8225d1"
       },
       "../src/app.module.ts": {
@@ -12520,14 +12520,14 @@
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "../src/auth/auth.service.ts": [
-        "../node_modules/typeorm/index.d.ts",
         "../src/auth/user.entity.ts",
+        "../node_modules/typeorm/index.d.ts",
         "../src/auth/dto/registerDto.ts"
       ],
       "../src/auth/auth.controler.ts": [
+        "../src/auth/dto/registerDto.ts",
         "../src/auth/auth.service.ts",
         "../src/auth/dto/loginDto.ts",
-        "../src/auth/dto/registerDto.ts",
         "../src/auth/user.entity.ts"
       ],
       "../node_modules/@nestjs/core/adapters/http-adapter.d.ts": [
@@ -13715,6 +13715,7 @@
       "../src/auth/dto/registerDto.ts",
       "../src/auth/enuns/permission.enum.ts",
       "../src/abstractions/appbaseEntity.ts",
+      "../src/auth/user.entity.ts",
       "../node_modules/@types/bcrypt/index.d.ts",
       "../src/config.ts",
       "../src/auth/auth.service.ts",
@@ -13758,7 +13759,6 @@
       "../node_modules/@nestjs/core/services/index.d.ts",
       "../node_modules/@nestjs/core/index.d.ts",
       "../node_modules/dotenv/types/index.d.ts",
-      "../src/main.ts",
       "../src/abstractions/auditableEntity.ts",
       "../node_modules/@types/anymatch/index.d.ts",
       "../node_modules/@babel/types/lib/index.d.ts",
@@ -13801,7 +13801,8 @@
       "../node_modules/@types/webpack-sources/index.d.ts",
       "../node_modules/@types/webpack/index.d.ts",
       "../node_modules/@types/yargs-parser/index.d.ts",
-      "../node_modules/@types/yargs/index.d.ts"
+      "../node_modules/@types/yargs/index.d.ts",
+      "../src/main.ts"
     ]
   },
   "version": "3.7.4"
