@@ -7,4 +7,5 @@ temp/
 /docker/run
 /data
 .env
-./dist
+/dist
+/public/css
