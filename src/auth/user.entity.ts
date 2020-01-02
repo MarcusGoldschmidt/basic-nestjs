@@ -22,4 +22,7 @@ export class UserEntity extends AppBaseEntity {
         default: false,
     })
     verified: boolean;
+
+    @Column()
+    rememberToken: string;
 }
