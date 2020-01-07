@@ -5,16 +5,16 @@
   "username": "root",
   "password": "123123",
   "database": "db_nest",
-  "synchronize": true,
+  "synchronize": false,
   "logging": false,
   "entities": [
-    "dist/**/*.entity{.ts,.js}"
+    "src/**/*.entity{.ts,.js}"
   ],
   "migrations": [
-    "src/migration/*.ts"
+    "src/migration/**/*{.ts,.js}"
   ],
   "cli": {
-    "entitiesDir": "src/**/**.entity{.ts,.js}",
-    "migrationsDir": "src/migration"
+    "entitiesDir": "src/**/*.entity{.ts,.js}",
+    "migrationsDir": "src/migration/"
   }
 }
