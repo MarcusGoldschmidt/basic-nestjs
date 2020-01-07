@@ -3,13 +3,20 @@ import {TypeOrmModule} from '@nestjs/typeorm';
 import {AuthModule} from './auth/auth.module';
 import {HandlebarsAdapter, MailerModule} from '@nest-modules/mailer';
 import {join} from 'path';
+import config from './config';
+import {UserModule} from './user/user.module';
+import {LoggerModule} from './infra/logger/logger.module';
+import AuthenticatedGuard from './common/guards/authenticated.guard';
+import {WebModule} from './web/web.module';
+import {AdminModule} from './admin/admin.module';
+import {LoginGuard} from './common/guards/login.guard';
 
 @Module({
     imports: [
         TypeOrmModule.forRoot(),
-        AuthModule,
         MailerModule.forRoot({
-            transport: 'smtps://user@domain.com:pass@smtp.domain.com',
+            // 'smtps://user@domain.com:pass@smtp.domain.com'
+            transport: `smtps://${config.MAIL.DOMAIN}:${config.MAIL.PASSWORD}@smtp.${config.MAIL.DOMAIN}`,
             defaults: {
                 from: '"nest-modules" <modules@nestjs.com>',
             },
@@ -22,9 +29,15 @@ import {join} from 'path';
                 },
             },
         }),
+        AuthModule,
+        UserModule,
+        LoggerModule,
+        MailerModule,
+        AdminModule,
+        WebModule,
     ],
     controllers: [],
-    providers: [],
+    providers: [AuthenticatedGuard, LoginGuard],
 })
 export class AppModule {
 }

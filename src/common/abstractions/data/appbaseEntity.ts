@@ -1,9 +1,9 @@
-import {BeforeInsert, BeforeUpdate, Column, PrimaryGeneratedColumn} from 'typeorm';
+import {BeforeInsert, BeforeUpdate, Column, Entity, Index, PrimaryGeneratedColumn} from 'typeorm';
 
-export class AppBaseEntity {
+export default class AppBaseEntityHost {
 
-    @PrimaryGeneratedColumn()
-    id: number;
+    @PrimaryGeneratedColumn('uuid')
+    id: string;
 
     @Column()
     createdAt: Date;
@@ -13,7 +13,7 @@ export class AppBaseEntity {
 
     @BeforeInsert()
     CreatedAt() {
-        this.createdAt = this.createdAt && new Date();
+        this.createdAt = new Date();
         this.updateAt = new Date();
     }
 

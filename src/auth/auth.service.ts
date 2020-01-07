@@ -1,42 +1,39 @@
-import {Injectable} from '@nestjs/common';
-import {UserEntity} from 'src/auth/user.entity';
-import {InjectRepository} from '@nestjs/typeorm';
-import {Repository} from 'typeorm';
+import {Injectable, Ip} from '@nestjs/common';
+import {UserEntity} from 'src/user/user.entity';
 import * as Crypt from 'bcrypt';
-import {RegisterDto} from './dto/registerDto';
-import {Permission} from './enuns/permission.enum';
-import Config from '../config';
+import AuthException from '../common/exceptions/auth.exception';
+import UserService from '../user/user.service';
 
 @Injectable()
 export class AuthService {
 
+    private readonly SESSION_NAME = 'current-user';
+
     constructor(
-        @InjectRepository(UserEntity)
-        private readonly userRepository: Repository<UserEntity>,
+        private readonly userService: UserService,
     ) {
     }
 
-    async Autenticate(email: string, password: string): Promise<boolean> {
-        const user = await this.userRepository
-            .createQueryBuilder()
-            .where('email = :email', {email})
-            .getOne();
+    async validate(email: string, password: string): Promise<UserEntity | undefined> {
+        const user = await this.userService.findByEmail(email);
 
-        return await Crypt.compare(password, user.password);
-    }
-
-    async CreateUser(data: RegisterDto): Promise<UserEntity> {
-        const user = this.userRepository.create();
-
-        user.email = data.email;
-
-        user.verified = false;
-        user.permission = Permission.Common;
-        user.password = await Crypt.hash(data.password, Config.APP_KEY);
-
-        await this.userRepository.save(user);
+        if (!user || !(await Crypt.compare(password, user.password))) {
+            return undefined;
+        }
 
         return user;
     }
 
+    async loginUser(email: string, password: string): Promise<boolean> {
+        const user = await this.validate(email, password);
+
+        if (!user) {
+            throw new AuthException();
+        }
+
+        return true;
+    }
+
+    async logout() {
+    }
 }
