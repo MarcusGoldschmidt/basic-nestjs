@@ -1,17 +1,17 @@
 import {NestFactory} from '@nestjs/core';
 import {AppModule} from './app.module';
 import {ValidationPipe} from '@nestjs/common';
-import * as env from 'dotenv';
 import {NestExpressApplication} from '@nestjs/platform-express';
 import {join} from 'path';
 import {AppLoggerService} from './infra/logger/logger.service';
 import * as rateLimit from 'express-rate-limit';
-import * as helmet from 'helmet';
 import * as passport from 'passport';
 import flash = require('connect-flash');
 import 'reflect-metadata';
 import session = require('express-session');
 import config from './config';
+import helmet = require('helmet');
+import cors = require('cors');
 
 async function bootstrap() {
 
@@ -19,15 +19,19 @@ async function bootstrap() {
         logger: new AppLoggerService(),
     });
 
+    // Middleware
+    app.use(helmet());
+    app.use(cors());
+
     app.use(session({
         secret: config.SESSION.KEY,
         resave: false,
         saveUninitialized: true,
-        cookie: {secure: true},
+        cookie: {
+            secure: true,
+        },
     }));
 
-    // Middleware
-    app.use(helmet());
     app.use(
         rateLimit({
             windowMs: 15 * 60 * 1000, // 15 minutes
@@ -40,7 +44,7 @@ async function bootstrap() {
     app.use(flash());
 
     // Validation Dtos
-    app.useGlobalPipes(new ValidationPipe());
+    // app.useGlobalPipes(new ValidationPipe());
 
     app.useStaticAssets(join(__dirname, '..', 'resources', 'public'));
     app.setBaseViewsDir(join(__dirname, '..', 'resources', 'views'));

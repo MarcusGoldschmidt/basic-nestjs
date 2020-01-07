@@ -1,10 +1,11 @@
-import {Controller, Get, Render} from '@nestjs/common';
+import {Controller, Get, Render, Session} from '@nestjs/common';
 
 @Controller('')
 export class WebController {
     @Get()
-    @Render('web/index')
-    homePage(): void {
-        return;
+    @Render('index')
+    homePage(@Session() session: any): any {
+        session.count = session.count ? session.count++ : 1;
+        return {count: session.count};
     }
 }

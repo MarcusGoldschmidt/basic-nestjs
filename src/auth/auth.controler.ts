@@ -1,37 +1,37 @@
-import {Body, Controller, Get, Param, Post, Redirect, UseGuards} from '@nestjs/common';
+import {Body, Controller, Get, Ip, Param, Post, Redirect, UseGuards, UseInterceptors} from '@nestjs/common';
 import {RegisterDto} from './dto/registerDto';
 import {AuthService} from './auth.service';
 import {LoginDto} from './dto/loginDto';
 import UserService from '../user/user.service';
-import {LoginGuard} from '../common/guards/login.guard';
+import {LoginInterceptor} from './interceptors/login.interceptor';
 
 @Controller('auth')
 export class AuthController {
 
     constructor(
         private readonly authService: AuthService,
-        private readonly userService: UserService
+        private readonly userService: UserService,
     ) {
     }
 
     @Post('login')
-    @UseGuards(LoginGuard)
-    @Redirect('admin')
-    login(@Body() login: LoginDto) {
-        return login;
+    @UseInterceptors(LoginInterceptor)
+    async login(@Body() login: LoginDto, @Ip() ip: string) {
+        const user = await this.userService.findByEmail(login.email);
+        user.rememberIp = ip;
+        return {user, password: login.password};
     }
 
     @Post('register')
-    @Redirect('admin')
+    @UseInterceptors(LoginInterceptor)
     async register(
         @Body() register: RegisterDto,
+        @Ip() ip: string,
     ): Promise<any> {
-        const result = await this.userService.createUser(register);
-        if (!result) {
-            return {
-                url: 'login',
-            };
-        }
+        const user = await this.userService.createUser(register);
+        user.rememberIp = ip;
+
+        return {user, password: register.password};
     }
 
     @Get('validate/:token')

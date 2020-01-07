@@ -7,6 +7,7 @@ import {Permission} from '../common/enuns/permission.enum';
 import * as Crypt from 'bcrypt';
 import Config from '../config';
 import InvalidArgumentsException from '../common/exceptions/invalid-arguments.exception';
+import InvalidContextException from '../common/exceptions/invalid-context.exception';
 
 @Injectable()
 export default class UserService {
@@ -28,6 +29,14 @@ export default class UserService {
             throw new InvalidArgumentsException('Confirmação da senha não é igual a senha original');
         }
 
+        const userValue = await this.userRepository.find({
+            email: data.email,
+        });
+
+        if (userValue) {
+            throw new InvalidContextException('Email já está sendo usado');
+        }
+
         const user = this.userRepository.create();
 
         user.name = data.name;
@@ -41,5 +50,26 @@ export default class UserService {
         await this.userRepository.save(user);
 
         return user;
+    }
+
+    async allUsers(): Promise<UserEntity[]> {
+        return await this.userRepository
+            .createQueryBuilder()
+            .getMany();
+    }
+
+    async updateSessionAndIp(
+        userId: string,
+        newSessionId: string,
+        newRememberIp: string): Promise<any> {
+
+        return await this.userRepository
+            .createQueryBuilder()
+            .update()
+            .set({
+                rememberIp: newRememberIp,
+                rememberToken: newSessionId,
+            }).where({id: userId}).execute();
+
     }
 }

@@ -1,5 +1,5 @@
 import {Module} from '@nestjs/common';
-import {MailSenderService} from './mail.service';
+import {MailSenderService} from './mailer.service';
 import {LoggerModule} from '../logger/logger.module';
 
 @Module({
@@ -7,5 +7,5 @@ import {LoggerModule} from '../logger/logger.module';
     providers: [MailSenderService],
     exports: [MailSenderService],
 })
-export class MailModule {
+export class MailerModule {
 }

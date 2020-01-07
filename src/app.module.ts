@@ -9,7 +9,6 @@ import {LoggerModule} from './infra/logger/logger.module';
 import AuthenticatedGuard from './common/guards/authenticated.guard';
 import {WebModule} from './web/web.module';
 import {AdminModule} from './admin/admin.module';
-import {LoginGuard} from './common/guards/login.guard';
 
 @Module({
     imports: [
@@ -37,7 +36,7 @@ import {LoginGuard} from './common/guards/login.guard';
         WebModule,
     ],
     controllers: [],
-    providers: [AuthenticatedGuard, LoginGuard],
+    providers: [AuthenticatedGuard],
 })
 export class AppModule {
 }
