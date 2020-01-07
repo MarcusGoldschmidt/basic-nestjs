@@ -11,7 +11,9 @@ export default <T extends unknown>(props: Props<T>) => {
     return (
         <div>
             <table>
-                {props.tableHeader}
+                <th>
+                    {props.tableHeader}
+                </th>
                 {props.tableBody}
             </table>
             <ul className='pagination'>
